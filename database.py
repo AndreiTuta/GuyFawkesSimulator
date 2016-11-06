@@ -1,6 +1,11 @@
 from crate import client
 
-connection = client.connect([crate_host], error_trace=True)
+invalid_host = 'http://not_responding_host:4200'
+crate_host='http://localhost:8000'
+connection = client.connect([invalid_host, crate_host])
+
+connection = client.connect()
+connection.client._active_servers
 
 cursor = connection.cursor()
 cursor.execute("""INSERT INTO locations
